@@ -170,7 +170,8 @@
         
         if ([self.query isKindOfClass:[BackendlessDataQuery class]]) {
             BackendlessDataQuery *dataQuery = [self.query copy];
-            dataQuery.queryOptions = [QueryOptions query:(int)_pageSize offset:(int)_offset];
+            dataQuery.queryOptions.pageSize = (int)_pageSize;
+            dataQuery.queryOptions.offset = (int)_offset;
             id response = [backendless.persistenceService find:type dataQuery:dataQuery];
             return [response isKindOfClass:[Fault class]] ? response : ((BackendlessCollection *)response).data;
         }
@@ -199,7 +200,8 @@
         
         if ([self.query isKindOfClass:[BackendlessDataQuery class]]) {
             BackendlessDataQuery *dataQuery = [self.query copy];
-            dataQuery.queryOptions = [QueryOptions query:(int)_pageSize offset:(int)_offset];
+            dataQuery.queryOptions.pageSize = (int)_pageSize;
+            dataQuery.queryOptions.offset = (int)_offset;
             [backendless.persistenceService find:type dataQuery:dataQuery responder:responder];
             return;
         }
